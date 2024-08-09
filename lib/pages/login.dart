@@ -36,7 +36,7 @@ class Login extends StatelessWidget {
 
               //Login Button
               Padding(
-                padding: EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(8.0),
                 child: ElevatedButton(
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
@@ -57,7 +57,7 @@ class Login extends StatelessWidget {
 
               //Login Via Google Button
               Padding(
-                padding: EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(8.0),
                 child: ElevatedButton(
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
@@ -72,12 +72,12 @@ class Login extends StatelessWidget {
                       borderRadius: BorderRadius.all(Radius.circular(5))
                     )
                   ),
-                  child: Text('Login via Google')),
+                  child: const Text('Login via Google')),
               ),
 
               //Register Button
               Padding(
-                padding: EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(8.0),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.green,
@@ -97,7 +97,7 @@ class Login extends StatelessWidget {
 
               // Forgot Password?
                Padding(
-                padding: EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(8.0),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
