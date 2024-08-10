@@ -1,7 +1,24 @@
 import 'package:flutter/material.dart';
 
-class Login extends StatelessWidget {
+class Login extends StatefulWidget {
   const Login({super.key});
+
+  @override
+  State<Login> createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
+  // Text Controllers for the name and password
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  // Clean up controller when disposed
+  @override
+  void dispose(){
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -13,10 +30,11 @@ class Login extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               // Email
-              const Padding(
-                padding: EdgeInsets.all(16.0),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
                 child: TextField(
-                  decoration: InputDecoration(
+                  controller: emailController,
+                  decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     hintText: 'Enter Email'
                   ),
@@ -24,10 +42,11 @@ class Login extends StatelessWidget {
               ),
 
               // Password
-              const Padding(
-                padding: EdgeInsets.all(16.0),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
                 child: TextField(
-                  decoration: InputDecoration(
+                  controller: passwordController,
+                  decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     hintText: 'Enter Password...'
                   ),
@@ -38,7 +57,13 @@ class Login extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    showDialog(context: context, builder: (context){
+                      return AlertDialog(
+                        content: Text('${emailController.text} and its password is ${passwordController.text}'),
+                      );
+                    });
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.green,
                     foregroundColor: Colors.white,
