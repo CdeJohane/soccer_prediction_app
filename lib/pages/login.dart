@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:soccer_app/controller/AuthService.dart';
+import 'package:soccer_app/pages/homepage.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -59,12 +62,24 @@ class _LoginState extends State<Login> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ElevatedButton(
-                  onPressed: () {
-                    showDialog(context: context, builder: (context){
-                      return AlertDialog(
-                        content: Text('${emailController.text} and its password is ${passwordController.text}'),
+                  onPressed: () async {
+                    // Send password to google for response
+                    final response = await AuthService().login(email: emailController.text, password: passwordController.text);
+
+                    // Check Success
+                    if (response!.contains('Success')){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const HomePage())
                       );
-                    });
+                    }else{
+                      // Send toast error
+                      Fluttertoast.showToast(
+                        msg: response,
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.BOTTOM
+                      );
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.green,
