@@ -48,3 +48,6 @@ app.*.map.json
 # Firebase RElated json files
 android/app/google-services.json
 firebase.json
+
+# Temporary Unfinished work
+lib/controller/
