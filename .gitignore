@@ -41,3 +41,10 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Keys and everything like that
+.env
+
+# Firebase RElated json files
+android/app/google-services.json
+firebase.json

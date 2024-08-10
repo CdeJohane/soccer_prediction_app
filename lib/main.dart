@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import './pages/login.dart';
 
-void main() {
-  runApp(const MaterialApp(
-    debugShowCheckedModeBanner: false,
-    title: 'Soccer Predicitons',
-    home: Login()
-  ));
+void main() async{
+  await dotenv.load(fileName: "../.env");
+  runApp(
+    const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Soccer Predicitons',
+      home: Login()
+    )
+  );
 }
 
 
