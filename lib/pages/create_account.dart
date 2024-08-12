@@ -65,8 +65,9 @@ class _CreateAccountState extends State<CreateAccount> {
     return Scaffold(
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.only(top:50.0),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               // Email
               Padding(
