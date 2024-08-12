@@ -7,10 +7,20 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
+    return Scaffold(
+      body: const Center(
         child: Text("Hello Govnor!"),
-      )
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(icon: Icon(Icons.sports_soccer_outlined), label: 'Match'),
+          BottomNavigationBarItem(icon: Icon(Icons.celebration), label: 'Results'),
+          BottomNavigationBarItem(icon: Icon(Icons.list_alt), label: 'Results'),
+          BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Setting'),
+        ],
+      ),
     );
   }
 }
