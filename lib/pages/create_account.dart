@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:soccer_app/controller/AuthService.dart';
 
 class CreateAccount extends StatefulWidget {
   const CreateAccount({super.key});
@@ -130,6 +131,23 @@ class _CreateAccountState extends State<CreateAccount> {
                       );
                     }else{
                       // Ship it over to Firebase and await confirmation
+                      final response = await AuthService().registration(email: emailController.text, password: passwordController.text);
+
+                      // Check if created. If so, Send Confirmation and return to login Screen
+                      if (response!.contains('Success')){
+                        Fluttertoast.showToast(
+                          msg: 'Account Created, You may login',
+                          toastLength: Toast.LENGTH_LONG,
+                          gravity: ToastGravity.BOTTOM
+                        );
+                        Navigator.pop(context);
+                      } else {
+                        Fluttertoast.showToast(
+                          msg: response,
+                          toastLength: Toast.LENGTH_LONG,
+                          gravity: ToastGravity.BOTTOM
+                        );
+                      }
                     }
 
                   },
