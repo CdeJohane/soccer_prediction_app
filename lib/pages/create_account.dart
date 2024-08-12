@@ -36,29 +36,29 @@ class _CreateAccountState extends State<CreateAccount> {
   }
 
   String validatePassword(String password) {
-  if (password.length < 8) {
-    return 'Password must be at least 8 characters long.';
-  }
+    if (password.length < 8) {
+      return 'Password must be at least 8 characters long.';
+    }
 
-  if (!RegExp(r'(?=.*[A-Z])').hasMatch(password)) {
-    return 'Password must contain at least one uppercase letter.';
-  }
+    if (!RegExp(r'(?=.*[A-Z])').hasMatch(password)) {
+      return 'Password must contain at least one uppercase letter.';
+    }
 
-  if (!RegExp(r'(?=.*[a-z])').hasMatch(password)) {
-    return 'Password must contain at least one lowercase letter.';
-  }
+    if (!RegExp(r'(?=.*[a-z])').hasMatch(password)) {
+      return 'Password must contain at least one lowercase letter.';
+    }
 
-  if (!RegExp(r'(?=.*\d)').hasMatch(password)) {
-    return 'Password must contain at least one digit.';
-  }
+    if (!RegExp(r'(?=.*\d)').hasMatch(password)) {
+      return 'Password must contain at least one digit.';
+    }
 
-  if (!RegExp(r'(?=.*[@$!%*?&])').hasMatch(password)) {
-    return 'Password must contain at least one special character.';
-  }
+    if (password != confirmPassController.text){
+      return'The passwords do not match';
+    }
 
-  // If all checks pass, return an empty string or a success message
-  return ''; // or return 'Password is valid.';
-}
+    // If all checks pass, return an empty string or a success message
+    return ''; // or return 'Password is valid.';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,108 +66,117 @@ class _CreateAccountState extends State<CreateAccount> {
       body: Center(
         child: Padding(
           padding: const EdgeInsets.only(top:50.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              // Email
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: TextField(
-                  keyboardType: TextInputType.emailAddress,
-                  controller: emailController,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: 'Enter Email'
-                  ),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  'Create Account',
+                  style: const TextStyle(
+                        fontSize: 40,
+                        fontStyle: FontStyle.normal,
+                      ),
                 ),
-              ),
-
-              // Password
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: TextField(
-                  obscureText: true,
-                  controller: passwordController,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: 'Enter Password...'
-                  ),
-                ),
-              ),
-
-              // One For confirming password
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: TextField(
-                  obscureText: true,
-                  controller: confirmPassController,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: 'Reenter Password to confirm...'
-                  ),
-                ),
-              ),
-
-              // Button to access Login
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: ElevatedButton(
-                  onPressed: () async {
-                    // Validate Entry
-                    final passValidation = validatePassword(passwordController.text);
-                    final emailValidation = validateEmail(emailController.text);
-                    if (passValidation.isNotEmpty){
-                      // Show Flutter Toast Error
-                      Fluttertoast.showToast(
-                        msg: passValidation,
-                        toastLength: Toast.LENGTH_LONG,
-                        gravity: ToastGravity.BOTTOM
-                      );
-                    } else if (emailValidation.isNotEmpty){
-                      // Show Flutter Toast Error
-                      Fluttertoast.showToast(
-                        msg: emailValidation,
-                        toastLength: Toast.LENGTH_LONG,
-                        gravity: ToastGravity.BOTTOM
-                      );
-                    }else{
-                      // Ship it over to Firebase and await confirmation
-                      final response = await AuthService().registration(email: emailController.text, password: passwordController.text);
-
-                      // Check if created. If so, Send Confirmation and return to login Screen
-                      if (response!.contains('Success')){
-                        Fluttertoast.showToast(
-                          msg: 'Account Created, You may login',
-                          toastLength: Toast.LENGTH_LONG,
-                          gravity: ToastGravity.BOTTOM
-                        );
-                        Navigator.pop(context);
-                      } else {
-                        Fluttertoast.showToast(
-                          msg: response,
-                          toastLength: Toast.LENGTH_LONG,
-                          gravity: ToastGravity.BOTTOM
-                        );
-                      }
-                    }
-
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.green,
-                    foregroundColor: Colors.white,
-                    textStyle: const TextStyle(
-                      fontSize: 15,
-                      fontStyle: FontStyle.normal,
-                      fontWeight: FontWeight.bold,
+                // Email
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: TextField(
+                    keyboardType: TextInputType.emailAddress,
+                    controller: emailController,
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: 'Enter Email'
                     ),
-                    shape: const BeveledRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(5))
-                    )
                   ),
-                  child: const Text('Create Account'),
                 ),
-              )
-            ],
+            
+                // Password
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: TextField(
+                    obscureText: true,
+                    controller: passwordController,
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: 'Enter Password...'
+                    ),
+                  ),
+                ),
+            
+                // One For confirming password
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: TextField(
+                    obscureText: true,
+                    controller: confirmPassController,
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: 'Reenter Password to confirm...'
+                    ),
+                  ),
+                ),
+            
+                // Button to access Login
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      // Validate Entry
+                      final passValidation = validatePassword(passwordController.text);
+                      final emailValidation = validateEmail(emailController.text);
+                      if (passValidation.isNotEmpty){
+                        // Show Flutter Toast Error
+                        Fluttertoast.showToast(
+                          msg: passValidation,
+                          toastLength: Toast.LENGTH_LONG,
+                          gravity: ToastGravity.BOTTOM
+                        );
+                      } else if (emailValidation.isNotEmpty){
+                        // Show Flutter Toast Error
+                        Fluttertoast.showToast(
+                          msg: emailValidation,
+                          toastLength: Toast.LENGTH_LONG,
+                          gravity: ToastGravity.BOTTOM
+                        );
+                      }else{
+                        // Ship it over to Firebase and await confirmation
+                        final response = await AuthService().registration(email: emailController.text, password: passwordController.text);
+            
+                        // Check if created. If so, Send Confirmation and return to login Screen
+                        if (response!.contains('Success')){
+                          Fluttertoast.showToast(
+                            msg: 'Account Created, You may login',
+                            toastLength: Toast.LENGTH_LONG,
+                            gravity: ToastGravity.BOTTOM
+                          );
+                          Navigator.pop(context);
+                        } else {
+                          Fluttertoast.showToast(
+                            msg: response,
+                            toastLength: Toast.LENGTH_LONG,
+                            gravity: ToastGravity.BOTTOM
+                          );
+                        }
+                      }
+            
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.green,
+                      foregroundColor: Colors.white,
+                      textStyle: const TextStyle(
+                        fontSize: 15,
+                        fontStyle: FontStyle.normal,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      shape: const BeveledRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(5))
+                      )
+                    ),
+                    child: const Text('Create Account'),
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),
