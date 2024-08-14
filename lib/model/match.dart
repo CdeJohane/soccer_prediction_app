@@ -12,6 +12,11 @@ class Match{
   // Use Default COnstructor
   Match(this._matchID, this._homeID, this._awayID, this._date, this._completed, this._homeScore, this._awayScore, this._winnerID);
 
+  // Get MAthc
+  int get homeID => _homeID;
+  int get awayID => _awayID;
+  int get homeScore => _homeScore;
+  int get awayScore => _awayScore;
   // Functions for winner
   void setWinner(int hScore, int aScore){
     if (_completed){

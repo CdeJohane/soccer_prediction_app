@@ -28,7 +28,19 @@ class HomePage extends StatelessWidget {
           SettingsPage()
         ];
 
+        const pageNames = [
+          'Home',
+          'Fixtures',
+          'Results',
+          'Standings',
+          'Settings'
+        ];
+
         return Scaffold(
+          appBar: AppBar(
+            title: Text(pageNames[indexNavBar]),
+            automaticallyImplyLeading: false,
+          ),
           body: pages[indexNavBar],
           bottomNavigationBar: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
