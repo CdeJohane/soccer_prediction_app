@@ -3,13 +3,14 @@ import 'package:soccer_app/model/selection.dart';
 class Player{
   final int playerID;
   final String name;
+  final String email;
   int points = 0;
   List<Selection> myPredictions = [];
   int indexValue = -1;
   int correct = 0;
   int wrong = 0;
 
-  Player(this.playerID, this.name);
+  Player(this.playerID, this.name, this.email);
 
   // Enter new Prediction
   void enterNewPrediction(Selection newSelection){

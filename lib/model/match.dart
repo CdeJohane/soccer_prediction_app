@@ -1,8 +1,8 @@
 class Match{
   // Variables to be used
   int? _matchID;
-  int? _homeID;
-  int? _awayID;
+  final int _homeID;
+  final int _awayID;
   bool _completed = false;
   int _homeScore = 0;
   int _awayScore = 0;
@@ -23,9 +23,9 @@ class Match{
       int diff = hScore - aScore;
 
       if (diff > 0){
-        _winnerID = _homeID!; // Home Win
+        _winnerID = _homeID; // Home Win
       } else if (diff < 0){
-        _winnerID = _awayID!; // Away Win
+        _winnerID = _awayID; // Away Win
       } else {
         _winnerID = 0;// Indicates draw
       }
