@@ -17,6 +17,8 @@ class Match{
   int get awayID => _awayID;
   int get homeScore => _homeScore;
   int get awayScore => _awayScore;
+  bool get completed => _completed;
+  int get matchID => _matchID!;
   // Functions for winner
   void setWinner(int hScore, int aScore){
     if (_completed){
