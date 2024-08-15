@@ -27,7 +27,7 @@ final List<Match> matchList = [
 
 final List<Selection> allSelections = [
   Selection(selectionID: 1, playerID: 1, matchID: 1, teamChoice: 1, resultAdded: false),
-  Selection(selectionID: 2, playerID: 2, matchID: 1, teamChoice: 2,resultAdded: false),
+  Selection(selectionID: 2, playerID: 2, matchID: 1, teamChoice: 1,resultAdded: false),
   Selection(selectionID: 3, playerID: 3, matchID: 1, teamChoice: 0, resultAdded: false),
   Selection(selectionID: 4, playerID: 4, matchID: 1, teamChoice: 1, resultAdded: false),
   Selection(selectionID: 5, playerID: 5, matchID: 1, teamChoice: 2, resultAdded: false),

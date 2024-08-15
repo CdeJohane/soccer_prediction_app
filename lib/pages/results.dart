@@ -43,38 +43,64 @@ class Results extends StatelessWidget {
       child: ListView.builder(
         itemCount: results.length,
         itemBuilder: (context, index) {
+          final List<String> hW = [
+            'draw',
+            'home',
+            'away'
+          ];
+          // Get Result bet
+          int betResult = -1;
+          int indexResult = dummyPlayers[1].myPredictions.indexWhere((element) => element.matchID == results[index].matchID);
+          if(indexResult != -1){
+            betResult = dummyPlayers[1].myPredictions[indexResult].winOrLose;
+          }
           // Get proper match time
           String matchDate = DateFormat('dd-MM-yyyy hh:mm a').format(results[index].date);
 
           return Card(
-            elevation: 50,
-            shadowColor: Colors.black,
+
             child: SizedBox(
+
               width: MediaQuery.of(context).size.width * 0.7,
               height: 150,
-              child: Padding(
-                padding: const EdgeInsets.only(top: 12.0, left: 8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Date and Time
-                    Text(matchDate),
-                    // Text For home team and score
-                    Text(
-                      allTeams[results[index].homeID - 1].teamName,
-                      style: TextStyle(
-                        fontSize: 20,
+              child: Container(
+                color: betResult == 1 ? Colors.green.withOpacity(0.2) : Colors.red.withOpacity(0.1),
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 12.0, left: 8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Date and Time
+                      Text(matchDate),
+                      // Text For home team and score
+                      Text(
+                        allTeams[results[index].homeID - 1].teamName,
+                        style: TextStyle(
+                          fontSize: 20,
+                        ),
                       ),
-                    ),
 
-                    // Text For away team and score
-                    Text(
-                      allTeams[results[index].awayID - 1].teamName,
-                      style: TextStyle(
-                        fontSize: 20,
+                      // Text For away team and score
+                      Text(
+                        allTeams[results[index].awayID - 1].teamName,
+                        style: TextStyle(
+                          fontSize: 20,
+                        ),
                       ),
-                    ),
-                  ],
+
+                      // Result for whether you won or lost
+                      Text(
+                        'Result: ${betResult == 1 ? 'Win' : 'Lose'}'
+                      ),
+
+                      // What the Player Actually Picked
+                      Text(
+                        betResult == -1
+                          ? 'You did not make a selection for the game'
+                          : 'You selected ${hW[dummyPlayers[1].myPredictions[indexResult].teamChoice]}'
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
