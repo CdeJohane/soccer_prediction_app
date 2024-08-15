@@ -43,8 +43,6 @@ class _MatchesPageState extends State<MatchesPage> {
       }
     }
 
-    
-
     return Center(
       child: ListView.builder(
         itemCount: fixtures.length,
@@ -57,7 +55,7 @@ class _MatchesPageState extends State<MatchesPage> {
           if (indexSelection != -1){
             choice = dummyPlayers[1].myPredictions[indexSelection].teamChoice;
           }else{
-            dummyPlayers[1].enterNewPrediction(Selection(selectionID: allSelections.length, playerID: dummyPlayers[1].playerID, matchID: matchList[index].matchID, teamChoice: -1));
+            dummyPlayers[1].enterNewPrediction(Selection(selectionID: allSelections.length, playerID: dummyPlayers[1].playerID, matchID: matchList[index].matchID, teamChoice: -1, resultAdded: false));
             indexSelection = dummyPlayers[1].myPredictions.length - 1;
           }
 
