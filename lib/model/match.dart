@@ -7,10 +7,11 @@ class Match{
   int _homeScore = 0;
   int _awayScore = 0;
   int _winnerID = -1;
+  int _homeOrAway = -1;
   DateTime? _date;
 
   // Use Default COnstructor
-  Match(this._matchID, this._homeID, this._awayID, this._date, this._completed, this._homeScore, this._awayScore, this._winnerID);
+  Match(this._matchID, this._homeID, this._awayID, this._date, this._completed, this._homeScore, this._awayScore, this._winnerID, this._homeOrAway);
 
   // Get MAthc
   int get homeID => _homeID;
@@ -19,6 +20,7 @@ class Match{
   int get awayScore => _awayScore;
   bool get completed => _completed;
   int get matchID => _matchID!;
+  int get homeOrAway => _homeOrAway;
   DateTime get date => _date!;
   // Functions for winner
   void setWinner(int hScore, int aScore){
