@@ -19,6 +19,7 @@ class Match{
   int get awayScore => _awayScore;
   bool get completed => _completed;
   int get matchID => _matchID!;
+  DateTime get date => _date!;
   // Functions for winner
   void setWinner(int hScore, int aScore){
     if (_completed){
