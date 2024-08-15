@@ -26,16 +26,16 @@ final List<Match> matchList = [
 ];
 
 final List<Selection> allSelections = [
-  Selection(selectionID: 1, playerID: 1, matchID: 1, teamChoiceID: 1),
-  Selection(selectionID: 2, playerID: 2, matchID: 1, teamChoiceID: 2),
-  Selection(selectionID: 3, playerID: 3, matchID: 1, teamChoiceID: 0),
-  Selection(selectionID: 4, playerID: 4, matchID: 1, teamChoiceID: 1),
-  Selection(selectionID: 5, playerID: 5, matchID: 1, teamChoiceID: 2),
-  Selection(selectionID: 6, playerID: 1, matchID: 2, teamChoiceID: 0),
-  Selection(selectionID: 7, playerID: 2, matchID: 2, teamChoiceID: 1),
-  Selection(selectionID: 8, playerID: 3, matchID: 2, teamChoiceID: 2),
-  Selection(selectionID: 9, playerID: 4, matchID: 2, teamChoiceID: 0),
-  Selection(selectionID: 10, playerID: 5, matchID: 2, teamChoiceID: 1),
+  Selection(selectionID: 1, playerID: 1, matchID: 1, teamChoice: 1),
+  Selection(selectionID: 2, playerID: 2, matchID: 1, teamChoice: 2),
+  Selection(selectionID: 3, playerID: 3, matchID: 1, teamChoice: 0),
+  Selection(selectionID: 4, playerID: 4, matchID: 1, teamChoice: 1),
+  Selection(selectionID: 5, playerID: 5, matchID: 1, teamChoice: 2),
+  Selection(selectionID: 6, playerID: 1, matchID: 2, teamChoice: 0),
+  Selection(selectionID: 7, playerID: 2, matchID: 2, teamChoice: 1),
+  Selection(selectionID: 8, playerID: 3, matchID: 2, teamChoice: 2),
+  Selection(selectionID: 9, playerID: 4, matchID: 2, teamChoice: 0),
+  Selection(selectionID: 10, playerID: 5, matchID: 2, teamChoice: 1),
 ];
 
 final List<Team> allTeams = [

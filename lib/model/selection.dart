@@ -4,7 +4,7 @@ class Selection{
   final int matchID;
   int winOrLose = -1; // 0 for loss, 1 for win, -1 for not completed yet
   DateTime? date;
-  int teamChoiceID = -1;
+  int teamChoice = -1; // 0 for predicted draw, 1 for predicted home, 2 for away
 
-  Selection({required this.selectionID, required this.playerID, required this.matchID, this.date, required this.teamChoiceID});
+  Selection({required this.selectionID, required this.playerID, required this.matchID, this.date, required this.teamChoice});
 }

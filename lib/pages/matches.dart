@@ -6,9 +6,14 @@ import 'package:soccer_app/model/selection.dart';
 import 'package:soccer_app/model/match.dart';
 import 'package:intl/intl.dart';
 
-class MatchesPage extends StatelessWidget {
+class MatchesPage extends StatefulWidget {
   const MatchesPage({super.key});
 
+  @override
+  State<MatchesPage> createState() => _MatchesPageState();
+}
+
+class _MatchesPageState extends State<MatchesPage> {
   @override
   Widget build(BuildContext context) {
     // For loop to populate the matches
@@ -38,12 +43,24 @@ class MatchesPage extends StatelessWidget {
       }
     }
 
+    
+
     return Center(
       child: ListView.builder(
         itemCount: fixtures.length,
         itemBuilder:(context, index) {
           // Get proper match time
           String matchDate = DateFormat('dd-MM-yyyy hh:mm a').format(fixtures[index].date);
+          // Check if selection exists for that match
+          int indexSelection = dummyPlayers[1].myPredictions.indexWhere((element) => element.matchID == matchList[index].matchID);
+          int choice = -2;
+          if (indexSelection != -1){
+            choice = dummyPlayers[1].myPredictions[indexSelection].teamChoice;
+          }else{
+            dummyPlayers[1].enterNewPrediction(Selection(selectionID: allSelections.length, playerID: dummyPlayers[1].playerID, matchID: matchList[index].matchID, teamChoice: -1));
+            indexSelection = dummyPlayers[1].myPredictions.length - 1;
+          }
+
 
           return Card(
             elevation: 50,
@@ -66,7 +83,7 @@ class MatchesPage extends StatelessWidget {
                         fontSize: 20,
                       ),
                     ),
-                
+
                     // Text For away team and score
                     Text(
                       allTeams[fixtures[index].awayID - 1].teamName,
@@ -74,15 +91,52 @@ class MatchesPage extends StatelessWidget {
                         fontSize: 20,
                       ),
                     ),
-                
+
                     // If condition for when the bet was placed or not
                     Expanded(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                              ElevatedButton(onPressed: () {}, child: Text('Home')),
-                              ElevatedButton(onPressed: () {}, child: Text('Draw')),
-                              ElevatedButton(onPressed: () {}, child: Text('Away'))
+                              ElevatedButton(
+                                onPressed: () {
+                                  dummyPlayers[1].myPredictions[indexSelection].teamChoice = 1;
+                                  // Update state
+                                  setState(() {
+                                    choice = 1;
+                                  });
+                                },
+                                child: Text('Home'),
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor: choice == 1 ? Colors.green : Colors.greenAccent[100],
+                                    foregroundColor: Colors.black
+                                ),
+                              ),
+                              ElevatedButton(onPressed: () {
+                                dummyPlayers[1].myPredictions[indexSelection].teamChoice = 0;
+                                  // Update state
+                                  setState(() {
+                                    choice = 0;
+                                  });
+                              },
+                              child: Text('Draw'),
+                              style: ElevatedButton.styleFrom(
+                                    backgroundColor: choice == 0? Colors.green : Colors.greenAccent[100],
+                                    foregroundColor: Colors.black
+                                ),
+                              ),
+                              ElevatedButton(onPressed: () {
+                                dummyPlayers[1].myPredictions[indexSelection].teamChoice = 2;
+                                  // Update state
+                                  setState(() {
+                                    choice = 2;
+                                  });
+                              }, 
+                              child: Text('Away'),
+                              style: ElevatedButton.styleFrom(
+                                    backgroundColor: choice == 2 ? Colors.green : Colors.greenAccent[100],
+                                    foregroundColor: Colors.black
+                                ),
+                              )
                         ],
                       ),
                     )
