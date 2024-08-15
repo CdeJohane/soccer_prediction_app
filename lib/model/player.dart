@@ -1,4 +1,5 @@
 import 'package:soccer_app/model/selection.dart';
+import 'match.dart';
 
 class Player{
   final int playerID;
@@ -8,7 +9,6 @@ class Player{
   List<Selection> myPredictions = [];
   int indexValue = -1;
   int correct = 0;
-  int wrong = 0;
 
   Player(this.playerID, this.name, this.email);
 
@@ -17,21 +17,31 @@ class Player{
     myPredictions.add(newSelection);
   }
 
-  // Update points tally
-  void updateTally(){
-    if(myPredictions.isNotEmpty && (indexValue<myPredictions.length)){
-      // Calculate Score
-      for (int i=indexValue+1; i<myPredictions.length; i++){
-        Selection index = myPredictions[i];
-        if(index.winOrLose == 1){
-          correct++;
-          points+=2;
-          indexValue++;
-        }else if(index.winOrLose == 0){
-          wrong++;
-          indexValue++;
+  // Update prediction result
+  void updatePredictionResult(Match match){
+    if (match.completed){
+      // Get home or away result and update that
+      int result = match.homeOrAway;
+      // Get index of match
+      int predictionIndex = myPredictions.indexWhere((element) => element.matchID == match.matchID);
+      // Update if element is available
+      if(predictionIndex!=-1){
+        if(myPredictions[predictionIndex].teamChoice == result){
+          myPredictions[predictionIndex].winOrLose = 1;
+        }else{
+          myPredictions[predictionIndex].winOrLose = 0;
         }
+        _updateTally(predictionIndex);
       }
     }
+  }
+
+  // Update points tally
+  void _updateTally(int selectedIndex){
+    // Check if its empty or nah
+    if ((selectedIndex != -1) && (myPredictions[selectedIndex].winOrLose ==1) && (!myPredictions[selectedIndex].resultAdded)){
+      correct++;
+    }
+    points = 2 * correct;
   }
 }

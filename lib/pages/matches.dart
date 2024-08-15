@@ -29,8 +29,8 @@ class _MatchesPageState extends State<MatchesPage> {
     // For loop to add u all the scores
     for (int i=0; i<dummyPlayers.length; i++){
       if (dummyPlayers[i].myPredictions.isNotEmpty){
-        for (int j =0; j<dummyPlayers[i].myPredictions.length; j++){
-          dummyPlayers[i].updateTally();
+        for (int j = 0; j<matchList.length; j++){
+          dummyPlayers[i].updatePredictionResult(matchList[j]);
         }
       }
     }
