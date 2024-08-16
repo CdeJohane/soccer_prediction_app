@@ -21,20 +21,20 @@ class Results extends StatelessWidget {
       }
     }
 
-    // For loop to add u all the scores
-    for (int i=0; i<dummyPlayers.length; i++){
-      if (dummyPlayers[i].myPredictions.isNotEmpty){
-        for (int j = 0; j<matchList.length; j++){
-          dummyPlayers[i].updatePredictionResult(matchList[j]);
-        }
-      }
-    }
-
     List<Match> results = [];
-    // Filter out atches that havent been completed
+    // Filter out matches that havent been completed
     for (int i =0; i< matchList.length; i++){
       if (matchList[i].completed){
         results.add(matchList[i]);
+      }
+    }
+
+    // For loop to add u all the scores
+    for (int i=0; i<dummyPlayers.length; i++){
+      if (dummyPlayers[i].myPredictions.isNotEmpty){
+        for (int j = 0; j<results.length; j++){
+          dummyPlayers[i].updatePredictionResult(results[j]);
+        }
       }
     }
 
