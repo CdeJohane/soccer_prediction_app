@@ -16,25 +16,6 @@ class MatchesPage extends StatefulWidget {
 class _MatchesPageState extends State<MatchesPage> {
   @override
   Widget build(BuildContext context) {
-    // For loop to populate the matches
-    for (Selection temp in allSelections){
-      // numbers.indexWhere((element) => element == target);
-      int index = dummyPlayers.indexWhere((element) => element.playerID == temp.playerID);
-
-      if(index >= 0){
-        dummyPlayers[index].enterNewPrediction(temp);
-      }
-    }
-
-    // For loop to add u all the scores
-    for (int i=0; i<dummyPlayers.length; i++){
-      if (dummyPlayers[i].myPredictions.isNotEmpty){
-        for (int j = 0; j<matchList.length; j++){
-          dummyPlayers[i].updatePredictionResult(matchList[j]);
-        }
-      }
-    }
-
     List<Match> fixtures = [];
     // Filter out atches that havent been completed
     for (int i =0; i< matchList.length; i++){
